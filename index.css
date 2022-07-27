@@ -1,0 +1,200 @@
+*{
+  padding: 0;
+  margin: 0;
+  /* 样式初始化 */
+}
+body,html{
+  height: 100%;
+  /* 设置页面的高度,配合左侧列表区域设置高度,适应页面 */
+}
+.header{
+  background-color: #354457;
+  height: 70px;
+  width: 100%;
+  /* 头部区域样式 */
+}
+.logo{
+  width: 200px;
+  height: 70px;
+  line-height: 70px;
+  color: aliceblue;
+  padding-left: 20px;
+  font-size: 14px;
+  /* logo区域样式 */
+}
+.logo img{
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  vertical-align: middle;
+  /* 图片 样式*/
+}
+.content{
+  height: calc(100% - 70px);
+  /* 内容区域整体高度样式 */
+}
+.content .left-menu{
+  height: 100%;
+  width: 200px;
+  background-color: #4d5e70;
+  color: 14px;
+  float: left;
+  /* 左侧按钮列表样式 */
+}
+
+.content .left-menu dd{
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  /* 学生管理样式 */
+}
+.content .left-menu dt{
+  padding-left: 20px;
+  padding-top: 20px;
+  /* 学生列表样式 */
+}
+.content .left-menu dd:hover{
+  background-color: #354457;
+}
+.content .left-menu dd.active{
+  background-color: #354457;
+  color: aliceblue;
+  /* 切换菜单列表样式 */
+}
+.content .right-content{
+  float: right;
+  height: 100%;
+  width: calc(100% - 200px);
+  background-color: #eee;
+  /* 右侧内容区域的样式 */
+  overflow: auto;
+}
+.content .right-content .add-student{
+  width: 100%;
+  /* height: 100%; */
+}
+.content .right-content .add-student .add-student-form{
+  width: 500px;
+  height: 500px;
+  margin: 50px auto;
+  font-size: 16px;
+}
+.content .right-content .add-student .add-student-form .form-group{
+  margin: 10px 10px;
+}
+.content .right-content .add-student .add-student-form .form-group input{
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+#sex{
+  margin-left: 20px;
+  vertical-align: center;
+}
+label{
+  display:inline-block;
+  width: 100px;
+  text-align:right;
+}
+#form-group-submit{
+  margin-left: 60px;
+  margin-top: 30px;
+  display: inline-block;
+}
+.submit{
+  width: 100px;
+  height: 20px;
+}
+.reset{
+  width: 100px;
+}
+.right-content > div{
+  display: none;
+}
+.right-content > div.content-active{
+  display: block;
+}
+/* 表格样式 */
+table{
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+}
+table thead{
+  background-color: #354457;
+  color: aliceblue;
+  position:sticky;
+}
+tr{
+  height: 30px;
+  line-height: 30px;
+}
+table .btn{
+  padding: 3px 10px;
+  background-color: #fff;
+  outline: none;
+  border:none;
+  margin-right: 5px;
+  cursor: pointer;
+}
+table .btn.edit{
+  background-color: #5cb8ee;
+}
+table .btn.del{
+  background-color: #d9534f;
+}
+.modal{
+  width: 100%;
+  height: 100%;
+  /* background-color: #fff; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+}
+.modal .modal-content{
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: calc(50% - 250px);
+  left: calc(50% - 250px);
+  /* margin: 100px auto; */
+  background-color: #fff;
+  border-radius: 10px;
+}
+.modal .mask{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.modal .modal-content .text{
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #999;
+}
+.modal .modal-content .edit-student-form{
+  font-size: 14px;
+  margin: 40px 70px;
+  
+}
+.modal .modal-content .edit-student-form > div{
+  margin: 10px 10px;
+}
+.modal .modal-content .edit-student-form > div input {
+  outline: none;
+}
+.modal .modal-content .edit-student-form > div#form-group-submit{
+  margin-left: 120px;
+}
+.modal .modal-content .edit-student-form > div#form-group-submit>button{
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+}

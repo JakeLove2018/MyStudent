@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- 适配的IE edge -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 移动端窗口适配-->
+  <title>学生管理系统</title>
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"> <!-- 地址栏图标 -->
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <!-- 划分页面区域,分为两部分,头部和内容区,内容区分为左右两个区域。 -->
+  <div class="header">
+    <!-- 头部区域只有一个logo和文字。 -->
+    <div class="logo">
+      <img src="./logo.jpeg" alt="logo背景图片">
+      <span>学生管理系统</span>
+    </div>
+  </div>
+  <div class="content">
+    <div class="left-menu">
+      <dl class="menu">
+        <dt>学生管理</dt>
+        <dd class="active list" data-id="student-list">学生列表</dd>
+        <dd data-id="add-student">新增学生</dd>
+      </dl>
+    </div>
+    <div class="right-content">
+      <div class="add-student con" id="add-student">
+        <form class="add-student-form" id="add-student-form">
+          <div class="form-group">
+            <label for="">姓名:</label>
+            <input type="text" class="form-control" id="name" >
+          </div>
+          <div class="form-group">
+            <label for="">性别:</label>
+            <input type="radio" class="form-control" id="sex" value="0" name="sex" checked >男
+            <input type="radio" class="form-control" id="sex" value="1" name="sex">女
+          </div>
+          <div class="form-group">
+            <label for="">学号:</label>
+            <input type="text" class="form-control" id="sNo" >
+          </div>
+          <div class="form-group">
+            <label for="">邮箱:</label>
+            <input type="text" class="form-control" id="email" >
+          </div>
+          <div class="form-group">
+            <label for="">年龄:</label>
+            <input type="text" class="form-control" id="birth" >
+          </div>
+          <div class="form-group">
+            <label for="">手机号:</label>
+            <input type="text" class="form-control" id="phone" >
+          </div>
+          <div class="form-group">
+            <label for="">住址:</label>
+            <input type="text" class="form-control" id="address" >
+          </div>
+          <div class="form-group" id="form-group-submit">
+            <input type="submit" class="submit" id="add-student-btn"></input>
+            <input type="reset" class="reset"></input>
+          </div>
+        </form>
+      </div>
+      <div class="student-list content-active con" id="student-list">
+        <table>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>性别</th>
+              <th>学号</th>
+              <th>邮箱</th>
+              <th>年龄</th>
+              <th>手机号</th>
+              <th>住址</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+            <!-- <tr>
+              <td>贾长林</td>
+              <td>男</td>
+              <td>14070330122</td>
+              <td>18686224781@163.com</td>
+              <td>28</td>
+              <td>18511277391</td>
+              <td>北京市昌平区</td>
+              <td>
+                <button class="btn deit">修改</button>
+                <button class="btn del">删除</button>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+        <div class="modal">
+          <div class="mask"></div>
+          <div class="modal-content">
+            <h3 class="text">编辑信息</h3>
+            <form class="edit-student-form">
+              <div class="form-group">
+                <label for="">姓名:</label>
+                <input type="text" class="form-control" id="name" >
+              </div>
+              <div class="form-group">
+                <label for="">性别:</label>
+                <input type="radio" class="form-control" id="sex" value="0" name="sex" checked >男
+                <input type="radio" class="form-control" id="sex" value="1" name="sex">女
+              </div>
+              <div class="form-group" readonly>
+                <label for="">学号:</label>
+                <input type="text" class="form-control" id="name" >
+              </div>
+              <div class="form-group">
+                <label for="">邮箱:</label>
+                <input type="text" class="form-control" id="name" >
+              </div>
+              <div class="form-group">
+                <label for="">年龄:</label>
+                <input type="text" class="form-control" id="name" >
+              </div>
+              <div class="form-group">
+                <label for="">手机号:</label>
+                <input type="text" class="form-control" id="name" >
+              </div>
+              <div class="form-group">
+                <label for="">住址:</label>
+                <input type="text" class="form-control" id="name" >
+              </div>
+              <div class="form-group" id="form-group-submit">
+                <button class="submit">提交</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="student_container"></div> -->
+  <script src="./index.js"></script>
+</body>
+
+</html>
