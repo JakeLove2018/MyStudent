@@ -95,42 +95,46 @@
             </tr> -->
           </tbody>
         </table>
+        <div class="turnPage">
+          <button class="prev">上一页</button>
+          <button class="next">下一页</button>
+        </div>
         <div class="modal">
           <div class="mask"></div>
           <div class="modal-content">
             <h3 class="text">编辑信息</h3>
-            <form class="edit-student-form">
+            <form class="edit-student-form" id="edit-student-form">
               <div class="form-group">
-                <label for="">姓名:</label>
+                <label for="name">姓名:</label>
                 <input type="text" class="form-control" id="name" >
               </div>
               <div class="form-group">
-                <label for="">性别:</label>
-                <input type="radio" class="form-control" id="sex" value="0" name="sex" checked >男
-                <input type="radio" class="form-control" id="sex" value="1" name="sex">女
+                <label for="sex">性别:</label>
+                <input type="radio" class="form-control" id="sex" value="1" name="sex" checked >男
+                <input type="radio" class="form-control" id="sex" value="0" name="sex">女
               </div>
               <div class="form-group" readonly>
-                <label for="">学号:</label>
-                <input type="text" class="form-control" id="name" >
+                <label for="sNo">学号:</label>
+                <input type="text" class="form-control" id="sNo" >
               </div>
               <div class="form-group">
                 <label for="">邮箱:</label>
-                <input type="text" class="form-control" id="name" >
+                <input type="text" class="form-control" id="email" >
               </div>
               <div class="form-group">
                 <label for="">年龄:</label>
-                <input type="text" class="form-control" id="name" >
+                <input type="text" class="form-control" id="birth" >
               </div>
               <div class="form-group">
                 <label for="">手机号:</label>
-                <input type="text" class="form-control" id="name" >
+                <input type="text" class="form-control" id="phone" >
               </div>
               <div class="form-group">
                 <label for="">住址:</label>
-                <input type="text" class="form-control" id="name" >
+                <input type="text" class="form-control" id="address" >
               </div>
               <div class="form-group" id="form-group-submit">
-                <button class="submit">提交</button>
+                <button class="submit" id="edit">提交</button>
               </div>
             </form>
           </div>

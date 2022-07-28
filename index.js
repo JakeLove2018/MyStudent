@@ -1,5 +1,17 @@
 var oDl = document.getElementsByClassName('menu')[0]; //获取选中的dl标签
 var oTable = document.getElementsByClassName('tbody')[0]; //获取表单数据
+var content = document.getElementsByClassName('con'); // 获取内容区
+var oDd = oDl.getElementsByTagName('dd'); //获取dd标签
+var model = document.getElementsByClassName('modal')[0]; // 获取遮罩层的标签
+var oBtn = document.getElementById('add-student-btn'); // 
+var tableData = [];
+var editStudentForm = document.getElementById('edit');
+var mask = document.getElementsByClassName('mask')[0];
+var nowPage = 1;
+var pageSize = 5;
+var prevBtn = document.getElementsByClassName('prev')[0]
+var nextBtn = document.getElementsByClassName('next')[0]
+var allPage = 1;
 // 函数初始化;
 function init() {
   bindEvent();
@@ -22,7 +34,6 @@ function bindEvent() {
     }
   }, false);
   // 点击提交事件
-  var oBtn = document.getElementById('add-student-btn');
   oBtn.addEventListener('click', function (e) {
     e.preventDefault();
     var studentObj = getFormData('add-student-form');
@@ -59,21 +70,56 @@ function bindEvent() {
       //   }
     }
   }, false);
+  // 点击编辑删除按钮,删除一个学生信息
   oTable.addEventListener('click', function (e) {
-    
     var tarName = e.target.nodeName;
     if(tarName != 'BUTTON'){
       return false;
     }else{
       // 点击修改学生信息
-      console.log("修改学生信息")
+      const btnClassName = [].slice.call(e.target.classList,0); // 获取按钮的类名
+      var isEdit = btnClassName.indexOf('edit') > -1;
+      var index = e.target.getAttribute('data-index');
+      console.log(isEdit)
+      if(isEdit){
+        model.style.display = 'block';
+        // 数据回填
+        renderEditForm(tableData[index])
+      }
+      var isDel = btnClassName.indexOf('del') > -1;
+      if(isDel){
+        var confirm = window.confirm("是否确认删除"+ tableData[index].name+ "同学的信息吗")
+        if(confirm){
+          transferData('/api/student/delBySno',{sNo:tableData[index].sNo},function(data){
+            alert("删除成功")
+            getTableData();
+          },'delete')
+        }
+      }
     }
   },false);
+  // 点击编辑按钮
+  editStudentForm.addEventListener('click',function(e){
+    e.preventDefault();
+    var studentObj = getFormData('edit-student-form');
+    var form = document.getElementById('edit-student-form');
+    if (studentObj) {
+      transferData('api/student/updateStudent', studentObj, function () {
+        alert("数据更新成功")
+        form.reset();
+        model.style.display = 'none';
+        getTableData();
+    })}
+  }, false);
+  // 点击阴影部分,mask消失
+  mask.addEventListener('click',function(e){
+    e.preventDefault();
+    model.style.display = 'none';
+  },false)
 }
 // 切换左侧导航条的样式
 function changMenuStyle(dom) {
   // 移除带有active的样式
-  var oDd = oDl.getElementsByTagName('dd');
   console.log(oDd)
   for (var i = 0; i < oDd.length; i++) {
     oDd[i].classList.remove('active');
@@ -83,7 +129,6 @@ function changMenuStyle(dom) {
 }
 // 切换右侧内容区
 function changConentStyle(id) {
-  var content = document.getElementsByClassName('con');
   for (var i = 0; i < content.length; i++) {
     content[i].classList.remove('content-active');
   }
@@ -126,19 +171,12 @@ function getFormData(id) {
   return obj
 }
 // 获取数据列表
-
 function getTableData() {
-  transferData('api/student/findAll', {}, function (data) {
-    renderTable(data);
+  transferData('api/student/findByPage', {page:nowPage,size:pageSize}, function (data) {
+    tableData = data;
+    allPage = Math.ceil(data.cont / pageSize);
+    renderTable(data.findByPage);
   })
-  // var result = saveData('https://open.duyiedu.com/api/student/findAll',{
-  //   appkey:"changlin_clmer_1564063408086",
-  // })
-  // if(result.status == 'success'){
-  //   renderTable(result.data)
-  // }else if(result == 'fail'){
-  //   alert(result.msg);
-  // }
 }
 // 渲染表格数据,使用字符串拼接
 function renderTable(data) {
@@ -151,12 +189,34 @@ function renderTable(data) {
     <td>'+ item.phone + '</td> \
     <td>'+ item.address + '</td> \
     <td> \
-      <button class="btn deit">编辑</button> \
-      <button class="btn del">删除</button> \
+      <button class="btn edit" data-index='+ index +'>编辑</button> \
+      <button class="btn del" data-index='+ index +'>删除</button> \
     </td> \
   </tr> \ ';
   });
   oTable.innerHTML = str;
+  if(nowPage == 1 ){
+    prevBtn.style.display = 'none';
+  }else if(nowPage == allPage){
+    nextBtn.style.display = 'none';
+  }else{
+    prevBtn.style.display = 'inline-block';
+    nextBtn.style.display = 'inline-block';
+  }
+}
+// 点击上一页的事件
+prevBtn.onClick = function(){
+  if(nowPage < 1){
+    nowPage -- ;
+  }
+  getTableData()
+};
+// 点击下一页的事件
+nextBtn.onclick = function(){
+  if(nowPage < allPage){
+    nowPage ++ ;
+  }
+  getTableData()
 }
 // 降低代码冗余度
 function transferData(path, data, cb) {
@@ -169,8 +229,19 @@ function transferData(path, data, cb) {
     alert(result.msg);
   }
 }
-
-
+// 渲染编辑表单的数据以及数据回填。
+function renderEditForm(data) {
+  var form = document.getElementsByClassName('edit-student-form')[0];
+  // 渲染表格数据
+  for(var prop in data){
+    if(form[prop]){
+      console.log(data[prop])
+      form[prop].value = data[prop]
+    }
+  }
+  
+}
+// 切换上一页和下一页
 init();
 
 
